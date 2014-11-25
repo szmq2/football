@@ -68,8 +68,8 @@ public abstract class AbstractGenerate {
 			logger.info("projectName : {}", projectName);
 			
 			// 模板文件路径
-			//tplPath = StringUtils.replace(projectPath + "/src/main/resources/template", "/", separator);
-			tplPath = StringUtils.replace(URLDecoder.decode(AbstractGenerate.class.getResource("/template").getPath(), "utf-8"), "/", separator);
+			tplPath = StringUtils.replace(projectPath + "/WebContent/template", "/", separator);
+			// tplPath = StringUtils.replace(URLDecoder.decode(AbstractGenerate.class.getResource("/template").getPath(), "utf-8"), "/", separator);
 			logger.info("Template Path: {}", tplPath);
 
 			// Java文件路径

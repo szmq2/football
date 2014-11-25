@@ -21,6 +21,7 @@
 		<property name="customLogLevel">
            <map>
               <entry key="com.ketayao.ketacustom" value="TRACE" />
+              <entry key="com.football" value="TRACE" />
            </map>
        </property>
 	</bean>

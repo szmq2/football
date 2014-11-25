@@ -14,7 +14,7 @@ import com.ketayao.ketacustom.generate.vo.Table;
  */
 public abstract class DataSource {
 
-	protected String[] types = new String[] { "TABLE" };
+	protected String[] types = new String[] { "t_team" };
 	protected Connection conn = null;
 
 	/**

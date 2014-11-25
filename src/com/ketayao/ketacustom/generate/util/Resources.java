@@ -16,9 +16,9 @@ public class Resources {
 
 	/************mysql 数据库配置 ************/
 	public static String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	public static String JDBC_URL = "jdbc:mysql://localhost:3306/keta_custom?useUnicode=true&characterEncoding=UTF-8"; // 数据库访问串
+	public static String JDBC_URL = "jdbc:mysql://127.0.0.1:3306/football?useUnicode=true&characterEncoding=UTF-8"; // 数据库访问串
 	public static String JDBC_USERNAME = "root";
-	public static String JDBC_PASSWORD = "root";
+	public static String JDBC_PASSWORD = "KYO2000";
 	
 	public static String TPL_TABLE_NAME;
 	public static String TPL_PACKAGE_NAME;

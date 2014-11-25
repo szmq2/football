@@ -15,10 +15,10 @@ public class CopyCommonFile extends AbstractGenerate {
 	public void copy() throws IOException {
 		// 拷贝keta-custom-resources中的tld文件夹和include.inc.jsp文件
 		logger.info("projectFile.getParentFile:" + projectFile.getParentFile());
-		File resources = new File(projectFile.getParentFile(), "keta-custom-resources");
+		File resources = new File(projectFile.getParentFile(), "football_code");
 		
 		// tld文件路径
-		String tldPath = StringUtils.replace(resources + "/src/main/webapp/WEB-INF/tld/", "/", separator);
+		String tldPath = StringUtils.replace(resources + "/", "/", separator);
 		logger.info("keta-custom-resources tld Path: {}", tldPath);
 		
 		File destDir = new File(this.webappPath + this.separator + "WEB-INF" + this.separator + "tld");
