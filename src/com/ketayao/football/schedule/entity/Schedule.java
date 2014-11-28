@@ -1,7 +1,7 @@
 /**
  * There are <a href="https://github.com/ketayao/keta-custom">keta-custom</a> code generation
  */
-package com.ketayao.football.team.entity;
+package com.ketayao.football.schedule.entity;
 
 import java.util.Date;
 
@@ -17,67 +17,57 @@ import javax.persistence.TemporalType;
 import com.ketayao.ketacustom.entity.Idable;
 
 @Entity
-@Table(name="t_team")
-public class Team implements Idable<Long>{
+@Table(name="t_schedule")
+public class Schedule implements Idable<Long>{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
 	/**
-	 * 球队名称
+	 * 名称
 	 */
-    @Column(nullable=false, length=20)
+    @Column(length=20)
     private String name;
     
 	/**
-	 * 球队人数
+	 * 介绍
 	 */
-    @Column(length=10)
-    private Integer number;
-    
-	/**
-	 * 队伍简介
-	 */
-    @Column(length=255)
+    @Column(length=500)
     private String descs;
     
 	/**
-	 * 联系人
+	 * 开始时间
 	 */
-    @Column(nullable=false, length=20)
-    private String contact;
+    @Column(length=19)
+	@Temporal(TemporalType.TIMESTAMP)
+    private Date startTime;
     
 	/**
-	 * 
+	 * 结束时间
 	 */
-    @Column(nullable=false, length=20)
-    private String phone;
+    @Column(length=19)
+	@Temporal(TemporalType.TIMESTAMP)
+    private Date endTime;
     
 	/**
 	 * 创建时间
 	 */
-    @Column(nullable=false, length=19)
+    @Column(length=19)
 	@Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
     
 	/**
 	 * 更新时间
 	 */
-    @Column(nullable=false, length=19)
+    @Column(length=19)
 	@Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
     
 	/**
 	 * 状态
 	 */
-    @Column(nullable=false, length=3)
+    @Column(length=3)
     private Integer status;
-    
-	/**
-	 * 球队等级
-	 */
-    @Column(nullable=false, length=10)
-    private Integer idLevel;
     
     /**
 	 * @return the id
@@ -108,59 +98,45 @@ public class Team implements Idable<Long>{
     }
 	
 	/**
-	 * @param number the number to set
+	 * @param descs the descs to set
 	 */
-    public void setNumber(Integer number){
-       this.number = number;
+    public void setDescs(String descs){
+       this.descs = descs;
     }
     
     /**
-     * @return the number 
-     */
-    public Integer getNumber(){
-       return this.number;
-    }
-	
-	/**
-	 * @param describe the descs to set
-	 */
-    public void setDescs(String describe){
-       this.descs = describe;
-    }
-    
-    /**
-     * @return the desc s
+     * @return the descs 
      */
     public String getDescs(){
        return this.descs;
     }
 	
 	/**
-	 * @param contact the contact to set
+	 * @param startTime the startTime to set
 	 */
-    public void setContact(String contact){
-       this.contact = contact;
+    public void setStartTime(Date startTime){
+       this.startTime = startTime;
     }
     
     /**
-     * @return the contact 
+     * @return the startTime 
      */
-    public String getContact(){
-       return this.contact;
+    public Date getStartTime(){
+       return this.startTime;
     }
 	
 	/**
-	 * @param phone the phone to set
+	 * @param endTime the endTime to set
 	 */
-    public void setPhone(String phone){
-       this.phone = phone;
+    public void setEndTime(Date endTime){
+       this.endTime = endTime;
     }
     
     /**
-     * @return the phone 
+     * @return the endTime 
      */
-    public String getPhone(){
-       return this.phone;
+    public Date getEndTime(){
+       return this.endTime;
     }
 	
 	/**
@@ -203,19 +179,5 @@ public class Team implements Idable<Long>{
      */
     public Integer getStatus(){
        return this.status;
-    }
-	
-	/**
-	 * @param idLevel the idLevel to set
-	 */
-    public void setIdLevel(Integer idLevel){
-       this.idLevel = idLevel;
-    }
-    
-    /**
-     * @return the idLevel 
-     */
-    public Integer getIdLevel(){
-       return this.idLevel;
     }
 }

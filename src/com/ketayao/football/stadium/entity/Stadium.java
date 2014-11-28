@@ -1,7 +1,7 @@
 /**
  * There are <a href="https://github.com/ketayao/keta-custom">keta-custom</a> code generation
  */
-package com.ketayao.football.team.entity;
+package com.ketayao.football.stadium.entity;
 
 import java.util.Date;
 
@@ -17,67 +17,79 @@ import javax.persistence.TemporalType;
 import com.ketayao.ketacustom.entity.Idable;
 
 @Entity
-@Table(name="t_team")
-public class Team implements Idable<Long>{
+@Table(name="t_stadium")
+public class Stadium implements Idable<Long>{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
 	/**
-	 * 球队名称
+	 * 名称
 	 */
-    @Column(nullable=false, length=20)
+    @Column(length=20)
     private String name;
     
 	/**
-	 * 球队人数
+	 * 介绍
 	 */
-    @Column(length=10)
-    private Integer number;
-    
-	/**
-	 * 队伍简介
-	 */
-    @Column(length=255)
+    @Column(length=500)
     private String descs;
     
 	/**
-	 * 联系人
+	 * 省市区
 	 */
-    @Column(nullable=false, length=20)
-    private String contact;
+    @Column(length=10)
+    private Integer area;
     
 	/**
-	 * 
+	 * 地址
 	 */
-    @Column(nullable=false, length=20)
-    private String phone;
+    @Column(length=500)
+    private String address;
+    
+	/**
+	 * 经度
+	 */
+    @Column(length=12)
+    private Double longitude;
+    
+	/**
+	 * 纬度
+	 */
+    @Column(length=12)
+    private Double latitude;
+    
+	/**
+	 * 介绍地址
+	 */
+    @Column(length=500)
+    private String descUrl;
+    
+	/**
+	 * 视频地址
+	 */
+    @Column(length=500)
+    private String videoUrl;
     
 	/**
 	 * 创建时间
 	 */
-    @Column(nullable=false, length=19)
+    @Column(length=19)
 	@Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
     
 	/**
 	 * 更新时间
 	 */
-    @Column(nullable=false, length=19)
+    @Column(length=19)
 	@Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
     
 	/**
 	 * 状态
 	 */
-    @Column(nullable=false, length=3)
+    @Column(length=3)
     private Integer status;
-    
-	/**
-	 * 球队等级
-	 */
-    @Column(nullable=false, length=10)
-    private Integer idLevel;
     
     /**
 	 * @return the id
@@ -108,59 +120,101 @@ public class Team implements Idable<Long>{
     }
 	
 	/**
-	 * @param number the number to set
+	 * @param descs the descs to set
 	 */
-    public void setNumber(Integer number){
-       this.number = number;
+    public void setDescs(String descs){
+       this.descs = descs;
     }
     
     /**
-     * @return the number 
-     */
-    public Integer getNumber(){
-       return this.number;
-    }
-	
-	/**
-	 * @param describe the descs to set
-	 */
-    public void setDescs(String describe){
-       this.descs = describe;
-    }
-    
-    /**
-     * @return the desc s
+     * @return the descs 
      */
     public String getDescs(){
        return this.descs;
     }
 	
 	/**
-	 * @param contact the contact to set
+	 * @param area the area to set
 	 */
-    public void setContact(String contact){
-       this.contact = contact;
+    public void setArea(Integer area){
+       this.area = area;
     }
     
     /**
-     * @return the contact 
+     * @return the area 
      */
-    public String getContact(){
-       return this.contact;
+    public Integer getArea(){
+       return this.area;
     }
 	
 	/**
-	 * @param phone the phone to set
+	 * @param address the address to set
 	 */
-    public void setPhone(String phone){
-       this.phone = phone;
+    public void setAddress(String address){
+       this.address = address;
     }
     
     /**
-     * @return the phone 
+     * @return the address 
      */
-    public String getPhone(){
-       return this.phone;
+    public String getAddress(){
+       return this.address;
+    }
+	
+	/**
+	 * @param longitude the longitude to set
+	 */
+    public void setLongitude(Double longitude){
+       this.longitude = longitude;
+    }
+    
+    /**
+     * @return the longitude 
+     */
+    public Double getLongitude(){
+       return this.longitude;
+    }
+	
+	/**
+	 * @param latitude the latitude to set
+	 */
+    public void setLatitude(Double latitude){
+       this.latitude = latitude;
+    }
+    
+    /**
+     * @return the latitude 
+     */
+    public Double getLatitude(){
+       return this.latitude;
+    }
+	
+	/**
+	 * @param descUrl the descUrl to set
+	 */
+    public void setDescUrl(String descUrl){
+       this.descUrl = descUrl;
+    }
+    
+    /**
+     * @return the descUrl 
+     */
+    public String getDescUrl(){
+       return this.descUrl;
+    }
+	
+	/**
+	 * @param videoUrl the videoUrl to set
+	 */
+    public void setVideoUrl(String videoUrl){
+       this.videoUrl = videoUrl;
+    }
+    
+    /**
+     * @return the videoUrl 
+     */
+    public String getVideoUrl(){
+       return this.videoUrl;
     }
 	
 	/**
@@ -203,19 +257,5 @@ public class Team implements Idable<Long>{
      */
     public Integer getStatus(){
        return this.status;
-    }
-	
-	/**
-	 * @param idLevel the idLevel to set
-	 */
-    public void setIdLevel(Integer idLevel){
-       this.idLevel = idLevel;
-    }
-    
-    /**
-     * @return the idLevel 
-     */
-    public Integer getIdLevel(){
-       return this.idLevel;
     }
 }
