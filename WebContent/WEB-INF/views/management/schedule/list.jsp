@@ -52,6 +52,7 @@
 				<th>创建时间</th>
 				<th>更新时间</th>
 				<th>状态</th>
+				<th>操作</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -65,6 +66,7 @@
 				<td><fmt:formatDate value="${item.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 				<td><fmt:formatDate value="${item.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 				<td>${item.status}</td>
+				<td><a href="${contextPath}/management/scheduleDetail/list?idSchedule=${item.id}" target="navTab" title="赛程维护">维护</a></td>
 			</tr>
 			</c:forEach>
 		</tbody>

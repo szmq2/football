@@ -7,11 +7,21 @@
 	<div class="pageFormContent" layoutH="58">
 	<p>
 		<label>赛程：</label>
-		<input type="text" name="idSchedule" maxlength="10" value="${scheduleDetail.idSchedule}" class="input-medium"/>
+		<select name="schedule.id">
+			<option value="">请选择</option>
+			<c:forEach items="${schedules}" var="item">
+			<option value="${item.id}" ${item.id eq scheduleDetail.schedule.id ? "selected='selected'" : ""}>${item.name}</option>
+			</c:forEach>
+		</select>
 	</p>
 	<p>
 		<label>体育场：</label>
-		<input type="text" name="idStadium" maxlength="10" value="${scheduleDetail.idStadium}" class="input-medium"/>
+		<select name="stadium.id">
+			<option value="">请选择</option>
+			<c:forEach items="${stadiums}" var="item">
+			<option value="${item.id}" ${item.id eq scheduleDetail.stadium.id ? "selected='selected'" : ""}>${item.name}</option>
+			</c:forEach>
+		</select>
 	</p>
 	<p>
 		<label>分组名称：</label>
@@ -27,17 +37,17 @@
 	</p>
 	<p>
 		<label>比赛日期：</label>
-		<input type="text" name="date" class="input-medium date" readonly="readonly" style="float:left;" value="<fmt:formatDate value="${scheduleDetail.date}" pattern="yyyy-MM-dd HH:mm:ss"/>"/>
+		<input type="text" name="date" class="input-medium date" readonly="readonly" style="float:left;" value="<fmt:formatDate value="${scheduleDetail.date}" pattern="yyyy-MM-dd"/>"/>
 		<a class="inputDateButton" href="javascript:;" style="float:left;">选择</a>
 	</p>
 	<p>
 		<label>开始时间：</label>
-		<input type="text" name="startTime" class="input-medium date" readonly="readonly" style="float:left;" value="<fmt:formatDate value="${scheduleDetail.startTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"/>
+		<input type="text" datefmt="yyyy-MM-dd HH:mm:ss" name="startTime" class="input-medium date" readonly="readonly" style="float:left;" value="<fmt:formatDate value="${scheduleDetail.startTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"/>
 		<a class="inputDateButton" href="javascript:;" style="float:left;">选择</a>
 	</p>
 	<p>
 		<label>结束时间：</label>
-		<input type="text" name="endTime" class="input-medium date" readonly="readonly" style="float:left;" value="<fmt:formatDate value="${scheduleDetail.endTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"/>
+		<input type="text" datefmt="yyyy-MM-dd HH:mm:ss" name="endTime" class="input-medium date" readonly="readonly" style="float:left;" value="<fmt:formatDate value="${scheduleDetail.endTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"/>
 		<a class="inputDateButton" href="javascript:;" style="float:left;">选择</a>
 	</p>
 	<p>

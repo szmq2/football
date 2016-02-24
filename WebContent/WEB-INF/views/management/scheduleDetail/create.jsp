@@ -5,12 +5,22 @@
 <form method="post" action="${contextPath }/management/scheduleDetail/create" class="required-validate pageForm" onsubmit="return validateCallback(this, dialogReloadNavTab);">
 	<div class="pageFormContent" layoutH="58">
 	<p>
-		<label>赛程：</label>
-		<input type="text" name="idSchedule" maxlength="10" class="input-medium"/>
+		<label>赛程：${idSchedule}</label>
+		<select name="schedule.id">
+			<option value="">请选择</option>
+			<c:forEach items="${schedules}" var="item">
+			<option value="${item.id}" ${item.id eq idSchedule ? "selected='selected'" : ""}>${item.name}</option>
+			</c:forEach>
+		</select>
 	</p>	
 	<p>
 		<label>体育场：</label>
-		<input type="text" name="idStadium" maxlength="10" class="input-medium"/>
+		<select name="stadium.id">
+			<option value="">请选择</option>
+			<c:forEach items="${stadiums}" var="item">
+			<option value="${item.id}">${item.name}</option>
+			</c:forEach>
+		</select>
 	</p>	
 	<p>
 		<label>分组名称：</label>
@@ -26,17 +36,17 @@
 	</p>	
 	<p>
 		<label>比赛日期：</label>
-		<input type="text" name="date" class="input-medium date" readonly="readonly" style="float:left;"/>
+		<input type="text" datefmt="yyyy-MM-dd" name="date" class="input-medium date" readonly="readonly" style="float:left;"/>
 		<a class="inputDateButton" href="javascript:;" style="float:left;">选择</a>
 	</p>	
 	<p>
 		<label>开始时间：</label>
-		<input type="text" name="startTime" class="input-medium date" readonly="readonly" style="float:left;"/>
+		<input type="text" datefmt="yyyy-MM-dd HH:mm:ss" name="startTime" class="input-medium date" readonly="readonly" style="float:left;"/>
 		<a class="inputDateButton" href="javascript:;" style="float:left;">选择</a>
 	</p>	
 	<p>
 		<label>结束时间：</label>
-		<input type="text" name="endTime" class="input-medium date" readonly="readonly" style="float:left;"/>
+		<input type="text" datefmt="yyyy-MM-dd HH:mm:ss" name="endTime" class="input-medium date validate[required]" readonly="readonly" style="float:left;"/>
 		<a class="inputDateButton" href="javascript:;" style="float:left;">选择</a>
 	</p>	
 	<p>

@@ -13,6 +13,12 @@
 					<input type="text" name="search_LIKE_title" value="${param.search_LIKE_title}"/>			
 				</li>
 			</ul>
+			<ul style="color: red; font-size: 20px;">
+				当前赛程：${schedule.name}<br/>
+				赛程时间：
+					<fmt:formatDate value="${schedule.startTime}" pattern="yyyy-MM-dd HH:mm:ss"/>~
+					<fmt:formatDate value="${schedule.endTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+			</ul>
 			<div class="subBar">
 				<ul>						
 					<li><div class="button"><div class="buttonContent"><button type="submit">搜索</button></div></div></li>
@@ -30,7 +36,7 @@
 				<li><a iconClass="magnifier" target="dialog" mask="true" width="530" height="250" rel="ScheduleDetail_view" href="${contextPath }/management/scheduleDetail/view/{slt_uid}"><span>查看赛程明细</span></a></li>
 			</shiro:hasPermission>		
 			<shiro:hasPermission name="ScheduleDetail:save">
-				<li><a class="add" target="dialog" mask="true" width="530" height="250" rel="ScheduleDetail_save" href="${contextPath }/management/scheduleDetail/create"><span>添加赛程明细</span></a></li>
+				<li><a class="add" target="dialog" mask="true" width="530" height="250" rel="ScheduleDetail_save" href="${contextPath }/management/scheduleDetail/create?idSchedule=${schedule.id}"><span>添加赛程明细</span></a></li>
 			</shiro:hasPermission>
 			<shiro:hasPermission name="ScheduleDetail:edit">
 				<li><a class="edit" target="dialog" mask="true" width="530" height="250" rel="ScheduleDetail_edit" href="${contextPath }/management/scheduleDetail/update/{slt_uid}"><span>编辑赛程明细</span></a></li>
@@ -68,12 +74,12 @@
 			<c:forEach var="item" items="${scheduleDetails}">
 			<tr target="slt_uid" rel="${item.id}">
 				<td><input name="ids" value="${item.id}" type="checkbox"></td>
-				<td>${item.idSchedule}</td>
-				<td>${item.idStadium}</td>
+				<td>${item.schedule.name}</td>
+				<td>${item.stadium.name}</td>
 				<td>${item.groupName}</td>
 				<td>${item.name}</td>
 				<td>${item.sort}</td>
-				<td><fmt:formatDate value="${item.date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+				<td><fmt:formatDate value="${item.date}" pattern="yyyy-MM-dd"/></td>
 				<td><fmt:formatDate value="${item.startTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 				<td><fmt:formatDate value="${item.endTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 				<td>${item.idTeam1}</td>

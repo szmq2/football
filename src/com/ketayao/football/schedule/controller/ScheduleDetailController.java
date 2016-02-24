@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletRequest;
-
 import javax.validation.Valid;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -31,16 +30,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ketayao.ketacustom.util.dwz.AjaxObject;
 import com.ketayao.ketacustom.util.dwz.Page;
 import com.ketayao.ketacustom.util.persistence.DynamicSpecifications;
+import com.ketayao.ketacustom.util.persistence.SearchFilter;
+import com.ketayao.ketacustom.util.persistence.SearchFilter.Operator;
 import com.ketayao.ketacustom.log.Log;
 import com.ketayao.ketacustom.log.LogMessageObject;
 import com.ketayao.ketacustom.log.impl.LogUitls;
+import com.ketayao.football.schedule.entity.Schedule;
 import com.ketayao.football.schedule.entity.ScheduleDetail;
 import com.ketayao.football.schedule.service.ScheduleDetailService;
+import com.ketayao.football.schedule.service.ScheduleService;
+import com.ketayao.football.stadium.entity.Stadium;
+import com.ketayao.football.stadium.service.StadiumService;
 
 @Controller
 @RequestMapping("/management/scheduleDetail")
 public class ScheduleDetailController {
 
+	@Autowired
+	private StadiumService stadiumService;
+
+	@Autowired
+	private ScheduleService scheduleService;
+	
 	@Autowired
 	private ScheduleDetailService scheduleDetailService;
 	
@@ -58,7 +69,14 @@ public class ScheduleDetailController {
 	
 	@RequiresPermissions("ScheduleDetail:save")
 	@RequestMapping(value="/create", method=RequestMethod.GET)
-	public String preCreate(Map<String, Object> map) {
+	public String preCreate(Long idSchedule, Map<String, Object> map) {
+		map.put("idSchedule", idSchedule);
+		
+		List<Schedule> schedules = scheduleService.findAll(new Page());
+		List<Stadium> stadiums = stadiumService.findAll(new Page());
+		map.put("schedules", schedules);
+		map.put("stadiums", stadiums);
+		
 		return CREATE;
 	}
 	
@@ -85,6 +103,10 @@ public class ScheduleDetailController {
 	@RequestMapping(value="/update/{id}", method=RequestMethod.GET)
 	public String preUpdate(@PathVariable Long id, Map<String, Object> map) {
 		ScheduleDetail scheduleDetail = scheduleDetailService.get(id);
+		List<Schedule> schedules = scheduleService.findAll(new Page());
+		List<Stadium> stadiums = stadiumService.findAll(new Page());
+		map.put("schedules", schedules);
+		map.put("stadiums", stadiums);
 		map.put("scheduleDetail", scheduleDetail);
 		return UPDATE;
 	}
@@ -122,15 +144,37 @@ public class ScheduleDetailController {
 		return AjaxObject.newOk("赛程明细删除成功！").setCallbackType("").toString();
 	}
 
+//	@RequiresPermissions("ScheduleDetail:view")
+//	@RequestMapping(value="/list", method={RequestMethod.GET, RequestMethod.POST})
+//	public String list(ServletRequest request, Page page, Map<String, Object> map) {
+//		Specification<ScheduleDetail> specification = DynamicSpecifications.bySearchFilter(request, ScheduleDetail.class);
+//		List<ScheduleDetail> scheduleDetails = scheduleDetailService.findByExample(specification, page);
+//		
+//		map.put("page", page);
+//		map.put("scheduleDetails", scheduleDetails);
+//
+//		return LIST;
+//	}
+	
 	@RequiresPermissions("ScheduleDetail:view")
 	@RequestMapping(value="/list", method={RequestMethod.GET, RequestMethod.POST})
-	public String list(ServletRequest request, Page page, Map<String, Object> map) {
-		Specification<ScheduleDetail> specification = DynamicSpecifications.bySearchFilter(request, ScheduleDetail.class);
+	public String list(Long idSchedule, ServletRequest request, Page page, Map<String, Object> map) {
+		Specification<ScheduleDetail> specification = null;
+		Schedule schedule = null;
+		if (idSchedule == null) {
+			specification = DynamicSpecifications.bySearchFilter(request, ScheduleDetail.class);
+		} else {
+			specification = DynamicSpecifications.bySearchFilter(request, ScheduleDetail.class, new SearchFilter("schedule.id", Operator.EQ, idSchedule));
+			schedule = scheduleService.get(idSchedule); 
+		}
+		
 		List<ScheduleDetail> scheduleDetails = scheduleDetailService.findByExample(specification, page);
+
 		
 		map.put("page", page);
+		map.put("schedule", schedule);
 		map.put("scheduleDetails", scheduleDetails);
-
+		
 		return LIST;
 	}
 	

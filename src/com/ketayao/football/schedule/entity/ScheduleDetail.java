@@ -7,13 +7,17 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.ketayao.football.stadium.entity.Stadium;
 import com.ketayao.ketacustom.entity.Idable;
 
 @Entity
@@ -26,15 +30,16 @@ public class ScheduleDetail implements Idable<Long>{
 	/**
 	 * 赛程
 	 */
-    @Column(length=10)
-    private Integer idSchedule;
+    @ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="idSchedule")
+	private Schedule schedule;
     
 	/**
 	 * 体育场
 	 */
-    @Column(length=10)
-    private Integer idStadium;
-    
+    @ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="idStadium")
+	private Stadium stadium;
 	/**
 	 * 分组名称
 	 */
@@ -144,34 +149,22 @@ public class ScheduleDetail implements Idable<Long>{
 		this.id = id;
 	}
 	
-	/**
-	 * @param idSchedule the idSchedule to set
-	 */
-    public void setIdSchedule(Integer idSchedule){
-       this.idSchedule = idSchedule;
-    }
-    
-    /**
-     * @return the idSchedule 
-     */
-    public Integer getIdSchedule(){
-       return this.idSchedule;
-    }
-	
-	/**
-	 * @param idStadium the idStadium to set
-	 */
-    public void setIdStadium(Integer idStadium){
-       this.idStadium = idStadium;
-    }
-    
-    /**
-     * @return the idStadium 
-     */
-    public Integer getIdStadium(){
-       return this.idStadium;
-    }
-	
+	public Schedule getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(Schedule schedule) {
+		this.schedule = schedule;
+	}
+
+	public Stadium getStadium() {
+		return stadium;
+	}
+
+	public void setStadium(Stadium stadium) {
+		this.stadium = stadium;
+	}
+
 	/**
 	 * @param groupName the groupName to set
 	 */
