@@ -12,6 +12,6 @@
 hs_err_pid*
 
 # 不必要的目录 #
-/logs
-/WebContent/WEB-INF/classes
-/.settings
+logs/
+WebContent/WEB-INF/classes/
+.settings/
